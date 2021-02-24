@@ -6,31 +6,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_brand")
-public class Brand implements Serializable {
+@Table(name = "tb_model")
+public class Model implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
+    private String gender;
 
-    public Brand() {
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    public Model() {
     }
 
-    public Brand(Long id, String name) {
+    public Model(Long id, String name, String gender, Brand brand) {
         this.id = id;
         this.name = name;
+        this.gender = gender;
+        this.brand = brand;
     }
 
-    public Brand(Brand brand) {
-        this.id = brand.getId();
-        this.name = brand.getName();
+    public Model(Model model) {
+        this.id = model.getId();
+        this.name = model.getName();
+        this.gender = model.getGender();
+        this.brand = model.getBrand();
     }
 
     public Long getId() {
@@ -49,6 +59,22 @@ public class Brand implements Serializable {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -65,7 +91,7 @@ public class Brand implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Brand other = (Brand) obj;
+        Model other = (Model) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -73,5 +99,4 @@ public class Brand implements Serializable {
             return false;
         return true;
     }
-
 }

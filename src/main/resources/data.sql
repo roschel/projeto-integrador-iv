@@ -1,0 +1,13 @@
+insert into tb_brand (name) values ('Nike')
+insert into tb_brand (name) values ('Vans')
+insert into tb_brand (name) values ('Puma')
+insert into tb_brand (name) values ('Adidas')
+
+insert into tb_model (name, gender, brand_id) values ('TÊNIS AIR JORDAN 3 RETRO MASCULINO', 'masculino', 1)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS NIKE AIR FORCE 1 PIXEL FEMININO', 'feminino', 1)
+insert into tb_model (name, gender, brand_id) values ('TENIS VANS OLD SKOOL', '', 2)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS PUMA SUEDE CLASSIC', 'masculino', 3)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS ADIDAS SUPERSTAR FEMININO', 'feminino', 4)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS ADIDAS SUPERSTAR MASCULINO', 'masculino', 4)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS PUMA SUEDE CLASSIC XXI MASCULINO', 'masculino', 3)
+insert into tb_model (name, gender, brand_id) values ('TÊNIS PUMA SUEDE STUDS FEMININO', 'feminino', 3)

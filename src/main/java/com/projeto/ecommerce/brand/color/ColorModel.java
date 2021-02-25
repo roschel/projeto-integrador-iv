@@ -1,46 +1,45 @@
-package com.projeto.ecommerce.entities;
+package com.projeto.ecommerce.brand.color;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.projeto.ecommerce.brand.BrandModel;
+
 @Entity
-@Table(name = "tb_model")
-public class Model implements Serializable {
+@Table(name = "tb_color")
+public class ColorModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private String gender;
 
-    @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    @ManyToMany(mappedBy = "colors", fetch = FetchType.EAGER)
+	private List<BrandModel> models = new ArrayList<>();
 
-    public Model() {
+    public ColorModel() {
     }
 
-    public Model(Long id, String name, String gender, Brand brand) {
+    public ColorModel(Long id, String name, BrandModel brandModel) {
         this.id = id;
         this.name = name;
-        this.gender = gender;
-        this.brand = brand;
     }
 
-    public Model(Model model) {
-        this.id = model.getId();
-        this.name = model.getName();
-        this.gender = model.getGender();
-        this.brand = model.getBrand();
+    public ColorModel(ColorModel entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
     }
 
     public Long getId() {
@@ -59,20 +58,12 @@ public class Model implements Serializable {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
+    public List<BrandModel> getModels() {
+        return models;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setModels(List<BrandModel> models) {
+        this.models = models;
     }
 
     @Override
@@ -91,7 +82,7 @@ public class Model implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Model other = (Model) obj;
+        ColorModel other = (ColorModel) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -99,4 +90,9 @@ public class Model implements Serializable {
             return false;
         return true;
     }
+
+    
+
+    
+
 }

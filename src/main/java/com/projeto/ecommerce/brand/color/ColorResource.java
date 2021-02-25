@@ -1,10 +1,7 @@
-package com.projeto.ecommerce.resources;
+package com.projeto.ecommerce.brand.color;
 
 import java.net.URI;
 import java.util.List;
-
-import com.projeto.ecommerce.entities.Model;
-import com.projeto.ecommerce.services.ModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +13,26 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value="/models")
-public class ModelResource {
+@RequestMapping(value="/colors")
+public class ColorResource {
 
     @Autowired
-    private ModelService service;
+    private ColorService service;
 
     @GetMapping
-    public List<Model> findAll(){
-        List<Model> list = service.findAll();
+    public List<ColorDTO> findAll(){
+        List<ColorDTO> list = service.findAll();
         return list;
     }
 
     @PostMapping
-    public ResponseEntity<Model> insert(@RequestBody Model model){
-        model = service.insert(model);
+    public ResponseEntity<ColorModel> insert(@RequestBody ColorModel color){
+        color = service.insert(color);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(model.getId())
+                .buildAndExpand(color.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(model);
+        return ResponseEntity.created(uri).body(color);
     }
 
 }

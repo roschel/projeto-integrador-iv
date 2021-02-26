@@ -26,7 +26,7 @@ public class ProductEntity implements Serializable {
     private String description;
     private Double rating;
     private String gender;
-    private Boolean status;
+    private Boolean delete;
     private Double price;
 
     @ManyToOne
@@ -36,14 +36,14 @@ public class ProductEntity implements Serializable {
     public ProductEntity() {
     }
 
-    public ProductEntity(Long id, String product, String description, Double rating, String gender, Boolean status,
+    public ProductEntity(Long id, String product, String description, Double rating, String gender, Boolean delete,
             Double price, BrandEntity brand) {
         this.id = id;
         this.product = product;
         this.description = description;
         this.rating = rating;
         this.gender = gender;
-        this.status = status;
+        this.delete = delete;
         this.price = price;
         this.brand = brand;
     }
@@ -88,12 +88,12 @@ public class ProductEntity implements Serializable {
         this.gender = gender;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getDelete() {
+        return delete;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
 
     public Double getPrice() {

@@ -43,8 +43,8 @@ public class BrandService {
         Optional<BrandEntity> obj = repository.findById(id);
         BrandEntity entity = obj.orElseThrow();
         String retorno = "Marca "+ entity.getBrand() + " já se encontra deletada.";
-        if (entity.getStatus()){
-            entity.setStatus(false);
+        if (!entity.getDelete()){
+            entity.setDelete(true);
             retorno = "Marca "+ entity.getBrand() + " deletada com sucesso.";
         }
         return retorno;
@@ -52,7 +52,7 @@ public class BrandService {
 
     private void copyDTOToEntity(BrandDTO dto, BrandEntity entity) {
         entity.setBrand(dto.getBrand());
-        entity.setStatus(dto.getStatus());
+        entity.setDelete(dto.getDelete());
     }
 
 }

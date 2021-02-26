@@ -1,9 +1,9 @@
 package com.projeto.ecommerce.product;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,13 +38,25 @@ public class ProductService {
         return new ProductDTO(entity);
 	}
 
+    @Transactional
+    public String delete (Long id){
+        Optional<ProductEntity> obj = repository.findById(id);
+        ProductEntity entity = obj.orElseThrow();
+        String retorno = "Produto "+ entity.getProduct() + " já se encontra deletada.";
+        if (!entity.getDelete()){
+            entity.setDelete(true);
+            retorno = "Produto "+ entity.getBrand() + " deletado com sucesso.";
+        }
+        return retorno;
+    }
+
     private void copyDTOToEntity(ProductDTO dto, ProductEntity entity) {
         entity.setProduct(dto.getProduct());
         entity.setDescription(dto.getDescription());
         entity.setGender(dto.getGender());
         entity.setPrice(dto.getPrice());
         entity.setRating(dto.getRating());
-        entity.setStatus(dto.getStatus());
+        entity.setDelete(dto.getDelete());
         entity.setBrand(dto.getBrand());
     }
 

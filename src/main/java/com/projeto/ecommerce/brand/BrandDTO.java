@@ -9,22 +9,22 @@ public class BrandDTO implements Serializable {
     private Long id;
 
     private String brand;
-    private Boolean status;
+    private Boolean delete;
 
 
     public BrandDTO() {
     }
 
-    public BrandDTO(Long id, String brand, Boolean status) {
+    public BrandDTO(Long id, String brand, Boolean delete) {
         this.id = id;
         this.brand = brand;
-        this.status = status;
+        this.delete = delete;
     }
 
     public BrandDTO(BrandEntity entity){
         this.id = entity.getId();
         this.brand = entity.getBrand();
-        this.status = entity.getStatus();
+        this.delete = entity.getDelete();
     }
 
     public Long getId() {
@@ -43,12 +43,12 @@ public class BrandDTO implements Serializable {
         this.brand = brand;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getDelete() {
+        return delete;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
 
     

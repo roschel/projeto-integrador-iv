@@ -24,7 +24,7 @@ public class BrandEntity implements Serializable {
     private Long id;
 
     private String brand;
-    private Boolean status;
+    private Boolean delete;
 
     @OneToMany(mappedBy = "product")
     private List<ProductEntity> products= new ArrayList<>();
@@ -33,10 +33,10 @@ public class BrandEntity implements Serializable {
     public BrandEntity() {
     }
 
-    public BrandEntity(Long id, String brand, Boolean status) {
+    public BrandEntity(Long id, String brand, Boolean delete) {
         this.id = id;
         this.brand = brand;
-        this.status=status;
+        this.delete=delete;
     }
 
     public Long getId() {
@@ -55,12 +55,12 @@ public class BrandEntity implements Serializable {
         this.brand = brand;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getDelete() {
+        return delete;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
 
 

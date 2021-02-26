@@ -1,10 +1,6 @@
 package com.projeto.ecommerce.color;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.projeto.ecommerce.brand.BrandDTO;
 
 public class ColorDTO implements Serializable {
 

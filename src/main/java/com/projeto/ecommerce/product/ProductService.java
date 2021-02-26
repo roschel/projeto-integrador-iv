@@ -36,6 +36,7 @@ public class ProductService {
         entity.setPrice(dto.getPrice());
         entity.setRating(dto.getRating());
         entity.setStatus(dto.getStatus());
+        entity.setBrand(dto.getBrand());
     }
 
 }

@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import com.projeto.ecommerce.brand.BrandEntity;
 
@@ -22,11 +25,20 @@ public class ProductDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 5, max = 60, message = "Máximo de 60 caracteres")
+    @NotBlank(message = "Campo obrigatório")
     private String product;
+
+    @Size(max = 1000, message = "Máximo de 1000 caracteres")
     private String description;
+
+    @Positive(message = "Avaliação deve ser um valor maior do que 0")
     private Double rating;
     private String gender;
     private Boolean delete;
+
+    @Positive(message = "Preço deve ser um valor maior do que 0")
+    @NotBlank(message = "Campo obrigatório")
     private Double price;
 
     @ManyToOne

@@ -3,6 +3,7 @@ package com.projeto.ecommerce.product;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,14 @@ public class ProductService {
 
         return new ProductDTO(entity);
     }
+
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto) {
+		ProductEntity entity = repository.getOne(id);
+        copyDTOToEntity(dto, entity);
+        entity = repository.save(entity);
+        return new ProductDTO(entity);
+	}
 
     private void copyDTOToEntity(ProductDTO dto, ProductEntity entity) {
         entity.setProduct(dto.getProduct());

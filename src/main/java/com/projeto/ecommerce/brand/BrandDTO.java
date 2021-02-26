@@ -1,10 +1,6 @@
 package com.projeto.ecommerce.brand;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.projeto.ecommerce.brand.color.ColorDTO;
 
 public class BrandDTO implements Serializable {
 
@@ -13,27 +9,22 @@ public class BrandDTO implements Serializable {
     private Long id;
 
     private String brand;
-    private String description;
-    private String gender;
+    private Boolean status;
 
-    private List<ColorDTO> colors = new ArrayList<>();
 
     public BrandDTO() {
     }
 
-    public BrandDTO(Long id, String brand, String description, String gender) {
+    public BrandDTO(Long id, String brand, Boolean status) {
         this.id = id;
         this.brand = brand;
-        this.description = description;
-        this.gender = gender;
+        this.status = status;
     }
 
-    public BrandDTO(BrandModel entity){
+    public BrandDTO(BrandEntity entity){
         this.id = entity.getId();
         this.brand = entity.getBrand();
-        this.description = entity.getDescription();
-        this.gender = entity.getGender();
-        entity.getColors().forEach(color -> this.colors.add(new ColorDTO(color.getId(),color.getName())));
+        this.status = entity.getStatus();
     }
 
     public Long getId() {
@@ -52,28 +43,12 @@ public class BrandDTO implements Serializable {
         this.brand = brand;
     }
 
-    public String getDescription() {
-        return description;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public List<ColorDTO> getColors() {
-        return colors;
-    }
-
-    public void setColors(List<ColorDTO> colors) {
-        this.colors = colors;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     

@@ -1,4 +1,4 @@
-package com.projeto.ecommerce.brand.color;
+package com.projeto.ecommerce.color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ public class ColorDTO implements Serializable {
 
     private Long id;
     private String name;
-    private List<BrandDTO> models = new ArrayList<>();
 
     public ColorDTO() {
     }
@@ -22,11 +21,9 @@ public class ColorDTO implements Serializable {
         this.name = name;
     }
 
-    public ColorDTO(ColorModel entity) {
+    public ColorDTO(ColorEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();
-        entity.getModels().forEach(
-                model -> this.models.add(new BrandDTO(model.getId(), model.getBrand(), model.getDescription(), model.getGender())));
     }
 
     public Long getId() {
@@ -44,9 +41,4 @@ public class ColorDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<BrandDTO> getModels() {
-        return models;
-    }
-
 }

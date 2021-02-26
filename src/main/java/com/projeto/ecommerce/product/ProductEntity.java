@@ -1,24 +1,20 @@
-package com.projeto.ecommerce.brand;
+package com.projeto.ecommerce.product;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.projeto.ecommerce.brand.color.ColorModel;
+import com.projeto.ecommerce.brand.BrandEntity;
 
 @Entity
-@Table(name = "tb_brand")
-public class BrandModel implements Serializable {
+@Table(name = "tb_product")
+public class ProductEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,33 +22,30 @@ public class BrandModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String brand;
+    private String product;
     private String description;
+    private Double rating;
     private String gender;
+    private Boolean status;
+    private Double price;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name="tb_brand_color",
-            joinColumns = @JoinColumn(name = "brand_id"), // chave estrangeira relacionada a classe onde estamos, ou seja, será o produto.(A própria classe)
-            inverseJoinColumns = @JoinColumn(name = "color_id")
-    )
-    private List<ColorModel> colors = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brand;
 
-    public BrandModel() {
+    public ProductEntity() {
     }
 
-    public BrandModel(Long id, String brand, String description, String gender) {
+    public ProductEntity(Long id, String product, String description, Double rating, String gender, Boolean status,
+            Double price, BrandEntity brand) {
         this.id = id;
-        this.brand = brand;
+        this.product = product;
         this.description = description;
+        this.rating = rating;
         this.gender = gender;
-    }
-
-    public BrandModel(BrandModel entity){
-        this.id = entity.getId();
-        this.brand = entity.getBrand();
-        this.description = entity.getDescription();
-        this.gender = entity.getGender();
+        this.status = status;
+        this.price = price;
+        this.brand = brand;
     }
 
     public Long getId() {
@@ -63,12 +56,12 @@ public class BrandModel implements Serializable {
         this.id = id;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getProduct() {
+        return product;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public String getDescription() {
@@ -79,6 +72,14 @@ public class BrandModel implements Serializable {
         this.description = description;
     }
 
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -87,12 +88,28 @@ public class BrandModel implements Serializable {
         this.gender = gender;
     }
 
-    public List<ColorModel> getColors() {
-        return colors;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setColors(List<ColorModel> colors) {
-        this.colors = colors;
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public BrandEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandEntity brand) {
+        this.brand = brand;
     }
 
     @Override
@@ -111,7 +128,7 @@ public class BrandModel implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        BrandModel other = (BrandModel) obj;
+        ProductEntity other = (ProductEntity) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -119,7 +136,5 @@ public class BrandModel implements Serializable {
             return false;
         return true;
     }
-
-    
 
 }

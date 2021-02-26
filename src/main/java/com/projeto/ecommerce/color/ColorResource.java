@@ -1,4 +1,4 @@
-package com.projeto.ecommerce.brand.color;
+package com.projeto.ecommerce.color;
 
 import java.net.URI;
 import java.util.List;
@@ -26,7 +26,7 @@ public class ColorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColorModel> insert(@RequestBody ColorModel color){
+    public ResponseEntity<ColorEntity> insert(@RequestBody ColorEntity color){
         color = service.insert(color);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")

@@ -1,9 +1,9 @@
-package com.projeto.ecommerce.brand.color;
+package com.projeto.ecommerce.color;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ColorRepository extends JpaRepository<ColorModel, Long> {
+public interface ColorRepository extends JpaRepository<ColorEntity, Long> {
 
 }

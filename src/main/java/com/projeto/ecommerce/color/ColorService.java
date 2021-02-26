@@ -1,4 +1,4 @@
-package com.projeto.ecommerce.brand.color;
+package com.projeto.ecommerce.color;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +15,15 @@ public class ColorService {
 
     @Transactional
     public List<ColorDTO> findAll(){
-        List<ColorModel> list = repository.findAll();
+        List<ColorEntity> list = repository.findAll();
         return list.stream().map(x -> new ColorDTO(x)).collect(Collectors.toList());
     }
 
     @Transactional
-    public ColorModel insert(ColorModel brand) {
-        ColorModel entity = repository.save(brand);
+    public ColorEntity insert(ColorEntity brand) {
+        ColorEntity entity = repository.save(brand);
 
-        return new ColorModel(entity);
+        return new ColorEntity(entity);
     }
 
 }

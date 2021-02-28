@@ -1,9 +1,8 @@
 package com.projeto.ecommerce.product;
 
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.projeto.ecommerce.brand.BrandEntity;
@@ -31,6 +29,8 @@ public class ProductEntity implements Serializable {
     private Long id;
 
     private String product;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Double rating;
     private String gender;
@@ -41,8 +41,13 @@ public class ProductEntity implements Serializable {
     @JoinColumn(name = "brand_id")
     private BrandEntity brand;
 
-    @ManyToMany(mappedBy = "products")
-    private List<ColorEntity> colors = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+        name="tb_product_color",
+        joinColumns = @JoinColumn(name="product_id"),
+        inverseJoinColumns = @JoinColumn(name="color_id")
+    )
+    private Set<ColorEntity> colors = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -122,6 +127,10 @@ public class ProductEntity implements Serializable {
         this.brand = brand;
     }
 
+    public Set<ColorEntity> getColors() {
+        return colors;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -146,5 +155,5 @@ public class ProductEntity implements Serializable {
             return false;
         return true;
     }
-
+    
 }

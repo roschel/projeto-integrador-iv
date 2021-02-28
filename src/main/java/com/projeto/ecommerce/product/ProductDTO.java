@@ -1,6 +1,10 @@
 package com.projeto.ecommerce.product;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +16,12 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import com.projeto.ecommerce.brand.BrandDTO;
+import com.projeto.ecommerce.color.ColorDTO;
 
-@Entity
-@Table(name = "tb_product")
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 5, max = 60, message = "Máximo de 60 caracteres")
@@ -37,6 +38,10 @@ public class ProductDTO implements Serializable {
 
     @Positive(message = "Preço deve ser um valor maior do que 0")
     private Double price;
+
+    private BrandDTO brand;
+
+    Set<ColorDTO> colors = new HashSet<>();
 
     public ProductDTO() {
     }
@@ -60,6 +65,8 @@ public class ProductDTO implements Serializable {
         this.gender = entity.getGender();
         this.delete = entity.getDelete();
         this.price = entity.getPrice();
+        this.brand = new BrandDTO(entity.getBrand());
+        entity.getColors().forEach(color -> this.colors.add(new ColorDTO(color)));
     }
 
     public Long getId() {
@@ -118,6 +125,14 @@ public class ProductDTO implements Serializable {
         this.price = price;
     }
 
+    public BrandDTO getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandDTO brand) {
+        this.brand = brand;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -141,6 +156,14 @@ public class ProductDTO implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Set<ColorDTO> getColors() {
+        return colors;
+    }
+
+    public void setColors(Set<ColorDTO> colors) {
+        this.colors = colors;
     }
 
 }

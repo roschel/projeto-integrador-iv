@@ -1,38 +1,30 @@
-package com.projeto.ecommerce.color;
+package com.projeto.ecommerce.size;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.projeto.ecommerce.product.ProductEntity;
-
-import org.hibernate.annotations.ManyToAny;
-
 @Entity
-@Table(name = "tb_color")
-public class ColorEntity implements Serializable {
+@Table(name = "tb_size")
+public class SizeEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Byte size;
 
-    private String name;
-
-    public ColorEntity() {
+    public SizeEntity() {
     }
 
-    public ColorEntity(Long id, String name) {
+    public SizeEntity(Long id, Byte size) {
         this.id = id;
-        this.name = name;
+        this.size = size;
     }
 
     public Long getId() {
@@ -43,12 +35,12 @@ public class ColorEntity implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Byte getSize() {
+        return size;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSize(Byte size) {
+        this.size = size;
     }
 
     @Override
@@ -67,7 +59,7 @@ public class ColorEntity implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ColorEntity other = (ColorEntity) obj;
+        SizeEntity other = (SizeEntity) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -75,5 +67,5 @@ public class ColorEntity implements Serializable {
             return false;
         return true;
     }
-
+    
 }

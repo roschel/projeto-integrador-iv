@@ -30,7 +30,7 @@ public class ColorDTO implements Serializable {
     public ColorDTO(ColorEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();
-        entity.getSizes().forEach(size -> this.sizes.add(new SizeDTO(size)));
+//        entity.getSizes().forEach(size -> this.sizes.add(new SizeDTO(size)));
     }
 
     public Long getId() {

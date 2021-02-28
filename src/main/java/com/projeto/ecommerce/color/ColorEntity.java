@@ -4,16 +4,10 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.projeto.ecommerce.size.SizeEntity;
+import com.projeto.ecommerce.size.key.ProductColorSize;
 
 @Entity
 @Table(name = "tb_color")
@@ -27,13 +21,16 @@ public class ColorEntity implements Serializable {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-        name="tb_color_size",
-        joinColumns = @JoinColumn(name="color_id"),
-        inverseJoinColumns = @JoinColumn(name="size_id")
-    )
-    private Set<SizeEntity> sizes = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(
+//        name="tb_color_size",
+//        joinColumns = @JoinColumn(name="color_id"),
+//        inverseJoinColumns = @JoinColumn(name="size_id")
+//    )
+//    private Set<SizeEntity> sizes = new HashSet<>();
+
+    @OneToMany(mappedBy = "colorEntity")
+    Set<ProductColorSize> sizes;
 
     public ColorEntity() {
     }
@@ -59,8 +56,12 @@ public class ColorEntity implements Serializable {
         this.name = name;
     }
 
-    public Set<SizeEntity> getSizes() {
+    public Set<ProductColorSize> getSizes() {
         return sizes;
+    }
+
+    public void setSizes(Set<ProductColorSize> sizes) {
+        this.sizes = sizes;
     }
 
     @Override

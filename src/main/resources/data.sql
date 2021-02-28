@@ -60,10 +60,5 @@ insert into tb_product_color (product_id, color_id) values (11, 3)
 insert into tb_product_color (product_id, color_id) values (12, 4)
 insert into tb_product_color (product_id, color_id) values (13, 5)
 
-insert into tb_color_size (color_id, size_id) values (1, 8)
-insert into tb_color_size (color_id, size_id) values (1, 9)
-insert into tb_color_size (color_id, size_id) values (4, 10)
-insert into tb_color_size (color_id, size_id) values (1, 11)
-insert into tb_color_size (color_id, size_id) values (1, 12)
-insert into tb_color_size (color_id, size_id) values (1, 13)
-insert into tb_color_size (color_id, size_id) values (1, 14)
+insert into tb_product_color_size (product_id, color_id, size, quantity) values (1, 8, 41, 6)
+

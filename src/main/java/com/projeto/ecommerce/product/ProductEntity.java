@@ -4,19 +4,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.projeto.ecommerce.brand.BrandEntity;
 import com.projeto.ecommerce.color.ColorEntity;
+import com.projeto.ecommerce.size.key.ProductColorSize;
 
 @Entity
 @Table(name = "tb_product")
@@ -48,6 +40,9 @@ public class ProductEntity implements Serializable {
         inverseJoinColumns = @JoinColumn(name="color_id")
     )
     private Set<ColorEntity> colors = new HashSet<>();
+
+    @OneToMany(mappedBy = "productEntity")
+    Set<ProductColorSize> sizes;
 
     public ProductEntity() {
     }
@@ -130,6 +125,15 @@ public class ProductEntity implements Serializable {
 
     public Set<ColorEntity> getColors() {
         return colors;
+    }
+
+
+    public Set<ProductColorSize> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(Set<ProductColorSize> sizes) {
+        this.sizes = sizes;
     }
 
     @Override

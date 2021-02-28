@@ -57,7 +57,6 @@ public class ProductService {
         entity.setPrice(dto.getPrice());
         entity.setRating(dto.getRating());
         entity.setDelete(dto.getDelete());
-        entity.setBrand(dto.getBrand());
     }
 
 }

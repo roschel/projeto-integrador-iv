@@ -20,10 +20,17 @@ public class ColorService {
     }
 
     @Transactional
-    public ColorEntity insert(ColorEntity brand) {
-        ColorEntity entity = repository.save(brand);
+    public ColorDTO insert(ColorDTO dto) {
+        ColorEntity entity = new ColorEntity();
+        copyDTOToEntity(dto, entity);
+        entity = repository.save(entity);
 
-        return new ColorEntity(entity);
+        return new ColorDTO(entity);
+    }
+
+
+    private void copyDTOToEntity(ColorDTO dto, ColorEntity entity) {
+        entity.setName(dto.getName());
     }
 
 }

@@ -2,12 +2,15 @@ package com.projeto.ecommerce.brand;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 public class BrandDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
+    @NotBlank(message = "Campo obrigatório")
     private String brand;
     private Boolean delete;
 

@@ -6,14 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import com.projeto.ecommerce.brand.BrandEntity;
+import com.projeto.ecommerce.brand.BrandDTO;
 
 @Entity
 @Table(name = "tb_product")
@@ -38,18 +36,13 @@ public class ProductDTO implements Serializable {
     private Boolean delete;
 
     @Positive(message = "Preço deve ser um valor maior do que 0")
-    @NotBlank(message = "Campo obrigatório")
     private Double price;
-
-    @ManyToOne
-    @JoinColumn(name = "tb_brand")
-    private BrandEntity brand;
 
     public ProductDTO() {
     }
 
     public ProductDTO(Long id, String product, String description, Double rating, String gender, Boolean delete,
-            Double price, BrandEntity brand) {
+            Double price) {
         this.id = id;
         this.product = product;
         this.description = description;
@@ -57,7 +50,6 @@ public class ProductDTO implements Serializable {
         this.gender = gender;
         this.delete = delete;
         this.price = price;
-        this.brand = brand;
     }
 
     public ProductDTO(ProductEntity entity) {
@@ -68,7 +60,6 @@ public class ProductDTO implements Serializable {
         this.gender = entity.getGender();
         this.delete = entity.getDelete();
         this.price = entity.getPrice();
-        this.brand = entity.getBrand();
     }
 
     public Long getId() {
@@ -125,14 +116,6 @@ public class ProductDTO implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public BrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandEntity brand) {
-        this.brand = brand;
     }
 
     @Override

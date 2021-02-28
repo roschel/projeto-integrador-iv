@@ -2,11 +2,15 @@ package com.projeto.ecommerce.color;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 public class ColorDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String name;
 
     public ColorDTO() {

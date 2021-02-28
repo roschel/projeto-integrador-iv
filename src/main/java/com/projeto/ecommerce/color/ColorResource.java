@@ -26,13 +26,13 @@ public class ColorResource {
     }
 
     @PostMapping
-    public ResponseEntity<ColorEntity> insert(@RequestBody ColorEntity color){
-        color = service.insert(color);
+    public ResponseEntity<ColorDTO> insert(@RequestBody ColorDTO dto){
+        dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(color.getId())
+                .buildAndExpand(dto.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(color);
+        return ResponseEntity.created(uri).body(dto);
     }
 
 }

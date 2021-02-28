@@ -29,7 +29,6 @@ public class BrandEntity implements Serializable {
     @OneToMany(mappedBy = "product")
     private List<ProductEntity> products= new ArrayList<>();
 
-
     public BrandEntity() {
     }
 
@@ -62,7 +61,6 @@ public class BrandEntity implements Serializable {
     public void setDelete(Boolean delete) {
         this.delete = delete;
     }
-
 
     @Override
     public int hashCode() {

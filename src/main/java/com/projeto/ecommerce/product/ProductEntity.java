@@ -1,16 +1,24 @@
 package com.projeto.ecommerce.product;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.projeto.ecommerce.brand.BrandEntity;
+import com.projeto.ecommerce.color.ColorEntity;
 
 @Entity
 @Table(name = "tb_product")
@@ -33,11 +41,14 @@ public class ProductEntity implements Serializable {
     @JoinColumn(name = "brand_id")
     private BrandEntity brand;
 
+    @ManyToMany(mappedBy = "products")
+    private List<ColorEntity> colors = new ArrayList<>();
+
     public ProductEntity() {
     }
 
     public ProductEntity(Long id, String product, String description, Double rating, String gender, Boolean delete,
-            Double price, BrandEntity brand) {
+            Double price) {
         this.id = id;
         this.product = product;
         this.description = description;
@@ -45,7 +56,6 @@ public class ProductEntity implements Serializable {
         this.gender = gender;
         this.delete = delete;
         this.price = price;
-        this.brand = brand;
     }
 
     public Long getId() {

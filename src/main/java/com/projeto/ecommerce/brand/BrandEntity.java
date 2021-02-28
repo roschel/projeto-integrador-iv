@@ -1,8 +1,8 @@
 package com.projeto.ecommerce.brand;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ public class BrandEntity implements Serializable {
     private Boolean delete;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductEntity> products= new ArrayList<>();
+    private Set<ProductEntity> products= new HashSet<>();
 
     public BrandEntity() {
     }
@@ -36,6 +36,12 @@ public class BrandEntity implements Serializable {
         this.id = id;
         this.brand = brand;
         this.delete=delete;
+    }
+
+    public BrandEntity(BrandDTO dto){
+        this.id = dto.getId();
+        this.brand = dto.getBrand();
+        this.delete = dto.getDelete();
     }
 
     public Long getId() {

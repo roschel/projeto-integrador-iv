@@ -2,7 +2,14 @@ package com.projeto.ecommerce.product;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.projeto.ecommerce.brand.BrandEntity;
+import com.projeto.ecommerce.color.ColorDTO;
+import com.projeto.ecommerce.color.ColorEntity;
+import com.projeto.ecommerce.color.ColorRepository;
+import com.projeto.ecommerce.size.SizeDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +20,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private ColorRepository colorRepository;    
 
     @Transactional(readOnly = true)
     public List<ProductDTO> findAll(){
@@ -57,6 +67,20 @@ public class ProductService {
         entity.setPrice(dto.getPrice());
         entity.setRating(dto.getRating());
         entity.setDelete(dto.getDelete());
+        entity.setBrand(new BrandEntity(dto.getBrand()));
+
+        entity.getColors().clear();
+        for (ColorDTO colorDto : dto.getColors()){
+            Optional<ColorEntity> colorObj = colorRepository.findById(colorDto.getId());
+            ColorEntity color = colorObj.orElseThrow();
+            entity.getColors().add(color);
+        }
+
+        // entity.getColors().forEach(color -> color.getSizes().clear());
+        // Set<SizeDTO> sizes = entity.getColors().forEach(color -> color.getSizes());
+        // for (SizeDTO sizeDto : sizes);
+
+        // }
     }
 
 }

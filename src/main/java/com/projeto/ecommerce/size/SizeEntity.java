@@ -1,12 +1,19 @@
 package com.projeto.ecommerce.size;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.projeto.ecommerce.color.ColorEntity;
 
 @Entity
 @Table(name = "tb_size")
@@ -18,13 +25,15 @@ public class SizeEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Byte size;
+    private Integer quantity;
 
     public SizeEntity() {
     }
 
-    public SizeEntity(Long id, Byte size) {
+    public SizeEntity(Long id, Byte size, Integer quantity) {
         this.id = id;
         this.size = size;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -41,6 +50,14 @@ public class SizeEntity implements Serializable {
 
     public void setSize(Byte size) {
         this.size = size;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -67,5 +84,7 @@ public class SizeEntity implements Serializable {
             return false;
         return true;
     }
+
+
     
 }

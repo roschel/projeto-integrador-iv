@@ -13,17 +13,21 @@ public class SizeDTO implements Serializable {
     @Positive(message = "Tamanho deve ser maior que zero")
     private Byte size;
 
+    private Integer quantity;
+
     public SizeDTO() {
     }
 
-    public SizeDTO(Long id, Byte size) {
+    public SizeDTO(Long id, Byte size, Integer quantity) {
         this.id = id;
         this.size = size;
+        this.quantity = quantity;
     }
 
     public SizeDTO(SizeEntity entity) {
         this.id = entity.getId();
         this.size = entity.getSize();
+        this.quantity = entity.getQuantity();
     }
 
     public Long getId() {
@@ -40,5 +44,13 @@ public class SizeDTO implements Serializable {
 
     public void setSize(Byte size) {
         this.size = size;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

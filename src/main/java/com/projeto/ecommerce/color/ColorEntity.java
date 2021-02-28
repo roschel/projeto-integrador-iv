@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.projeto.ecommerce.product.ProductEntity;
-
-import org.hibernate.annotations.ManyToAny;
+import com.projeto.ecommerce.size.SizeEntity;
 
 @Entity
 @Table(name = "tb_color")
@@ -26,6 +26,14 @@ public class ColorEntity implements Serializable {
     private Long id;
 
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+        name="tb_color_size",
+        joinColumns = @JoinColumn(name="color_id"),
+        inverseJoinColumns = @JoinColumn(name="size_id")
+    )
+    private Set<SizeEntity> sizes = new HashSet<>();
 
     public ColorEntity() {
     }
@@ -49,6 +57,10 @@ public class ColorEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<SizeEntity> getSizes() {
+        return sizes;
     }
 
     @Override

@@ -53,7 +53,7 @@ public class ProductEntity implements Serializable {
     }
 
     public ProductEntity(Long id, String product, String description, Double rating, String gender, Boolean delete,
-            Double price) {
+            Double price, BrandEntity brand) {
         this.id = id;
         this.product = product;
         this.description = description;
@@ -61,6 +61,7 @@ public class ProductEntity implements Serializable {
         this.gender = gender;
         this.delete = delete;
         this.price = price;
+        this.brand = brand;
     }
 
     public Long getId() {
